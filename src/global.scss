@@ -16,7 +16,7 @@
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
-@import '@ionic/angular/css/display.css';
+@import "@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
@@ -24,3 +24,51 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+@font-face {
+  font-family: "MoniTalic"; //This is what we are going to call
+  src: url("./assets/font/Montserrat-Italic-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Mon"; //This is what we are going to call
+  src: url("./assets/font/Montserrat-VariableFont_wght.ttf");
+}
+
+ion-content {
+  font-family: Mon !important;
+}
+
+ion-card {
+  padding: 10px;
+  background-color: white;
+  margin: 10px 5px;
+  box-shadow: -1px -2px 5px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: -1px -2px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: -1px -2px 5px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  color: black;
+}
+
+ion-tab-bar {
+  border: none;
+  box-shadow: -1px -2px 5px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: -1px -2px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: -1px -2px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+ion-tab-button {
+  background-color: white;
+}
+
+ion-tab-button:first-child {
+  border-right: 1px solid #cfcfcf;
+}
+
+.tab-selected {
+  background-color: #489b82;
+  color: white;
+}
+
+h6 {
+  font-weight: 400;
+}
