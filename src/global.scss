@@ -122,6 +122,8 @@ h6 {
   display: flex;
   border-bottom: 1px solid #cecece;
   align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
 }
 
 .records-input:last-child {
@@ -134,7 +136,7 @@ h6 {
   width: 40px;
   height: 40px;
   align-items: center;
-  padding: 6px 10px 10px 10px;
+  padding: 6px 12px 10px 12px;
 
   &--add {
     background-color: #489b82;
@@ -144,6 +146,7 @@ h6 {
   &--del {
     background-color: #b94747;
     color: white;
+    padding: 6px 14px 10px 14px;
   }
 }
 
@@ -171,11 +174,11 @@ h6 {
 
     h6 {
       color: #ccc;
-      margin-right: 5px;
+      margin-right: 10px;
     }
 
     h5 {
-      margin-right: 5px;
+      margin-right: 10px;
     }
 
     ion-icon {
