@@ -34,6 +34,10 @@
   src: url("./assets/font/Montserrat-VariableFont_wght.ttf");
 }
 
+.md body {
+  background-color: #4acf9f !important;
+}
+
 ion-content {
   font-family: Mon !important;
 }
@@ -71,4 +75,128 @@ ion-tab-button:first-child {
 
 h6 {
   font-weight: 400;
+}
+
+.summary-box {
+  display: flex;
+  padding: 10px;
+  background-color: #489b82;
+  box-shadow: -1px 1px 12px -3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -1px 1px 12px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 1px 12px -3px rgba(0, 0, 0, 0.75);
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 30px;
+    white-space: nowrap;
+
+    h5 {
+      margin-bottom: 5px;
+    }
+
+    h6 {
+      margin-top: 0;
+    }
+  }
+
+  &__img-holder {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.record {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #cecece;
+}
+
+.record:last-child {
+  border: none;
+}
+
+.records-input {
+  display: flex;
+  border-bottom: 1px solid #cecece;
+  align-items: center;
+}
+
+.records-input:last-child {
+  border: none;
+}
+
+.circle-button {
+  border-radius: 50%;
+  font-size: 25px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  padding: 6px 10px 10px 10px;
+
+  &--add {
+    background-color: #489b82;
+    color: white;
+  }
+
+  &--del {
+    background-color: #b94747;
+    color: white;
+  }
+}
+
+.input-label-placement-floating {
+  color: #cfcfcf;
+}
+
+.btn-primary {
+  background-color: white;
+  color: #489b82;
+  padding: 15px 15px;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+.records-edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__left {
+    display: flex;
+    align-items: flex-end;
+
+    h6 {
+      color: #ccc;
+      margin-right: 5px;
+    }
+
+    h5 {
+      margin-right: 5px;
+    }
+
+    ion-icon {
+      margin-bottom: 8px;
+    }
+  }
+
+  &__right {
+    h6 {
+      text-decoration: underline;
+      color: #ccc;
+    }
+  }
+}
+
+ion-icon {
+  font-size: 22px;
+}
+
+.login-btn {
+  padding: 10px;
+  font-size: 26px;
+  margin-top: 5px;
 }
