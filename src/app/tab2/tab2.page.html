@@ -1,33 +1,3 @@
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <div class="records-edit">
-      <div class="records-edit__left">
-        <h5>Szöveg</h5>
-        <h6>Kiadás</h6>
-        <ion-icon name="construct-outline"></ion-icon>
-      </div>
-      <div class="records-edit__right">
-        <h6>Törlés</h6>
-      </div>
-    </div>
-    <div class="records-input">
-      <h6>Ez egy valami</h6>
-      <h6>50.000</h6>
-      <button class="circle-button circle-button--del">-</button>
-    </div>
-    <div class="records-input">
-      <ion-input
-        id="recordInputName"
-        label="Szöveg"
-        labelPlacement="floating"
-      ></ion-input>
-      <ion-input
-        id="recordInputValue"
-        label="Összeg"
-        labelPlacement="floating"
-      ></ion-input>
-      <button class="circle-button circle-button--add">+</button>
-    </div>
-  </ion-card>
-  <button class="btn-primary">+ Új csoport</button>
+  <app-inputcard></app-inputcard>
 </ion-content>
