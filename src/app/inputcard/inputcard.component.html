@@ -1,31 +1,34 @@
-<ion-card>
+<ion-card *ngFor="let cards of invoice.card">
   <div class="records-edit">
     <div class="records-edit__left">
-      <h5>Szöveg</h5>
-      <h6>Kiadás</h6>
+      <h5>{{ cards.cardName }}</h5>
       <ion-icon name="construct-outline"></ion-icon>
     </div>
     <div class="records-edit__right">
-      <h6>Törlés</h6>
+      <h6 (click)="deleteCard(cards.id)">törlés</h6>
     </div>
   </div>
-  <div class="records-input">
-    <h6>Ez egy valami</h6>
-    <h6>50.000</h6>
-    <button class="circle-button circle-button--del">-</button>
-  </div>
-  <div class="records-input">
+  <div id="re-input" class="records-input" *ngFor="let record of cards.records">
     <ion-input
       id="recordInputName"
       label="Szöveg"
       labelPlacement="floating"
+      [(ngModel)]="record.recordName"
+      placeholder="{{ record.recordName }}"
+      value="{{ record.recordName }}"
     ></ion-input>
     <ion-input
-      id="recordInputValue"
-      label="Összeg"
+      id="recordInputName"
+      label="Érték"
+      type="number"
       labelPlacement="floating"
+      [(ngModel)]="record.recordValue"
+      placeholder="{{ record.recordValue }}"
+      value="{{ record.recordValue }}"
     ></ion-input>
-    <button class="circle-button circle-button--add">+</button>
+    <button (click)="addRecord(cards.id)">add</button>
+    <button (click)="deleteRecord(cards.id, record.id)">Delete</button>
   </div>
 </ion-card>
-<button class="btn-primary">+ Új csoport</button>
+<button class="btn-primary" (click)="newGroup()">+ Új csoport</button>
+<button class="btn-primary" (click)="valami()">teszt</button>

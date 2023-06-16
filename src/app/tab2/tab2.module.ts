@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 import { Tab2PageRoutingModule } from './tab2-routing.module';
-import { inputCards } from '../inputcard/inputcard.module';
+import { InputCardModule } from '../inputcard/inputcard.module';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { inputCards } from '../inputcard/inputcard.module';
     CommonModule,
     FormsModule,
     Tab2PageRoutingModule,
-    inputCards,
+    InputCardModule,
   ],
   declarations: [Tab2Page],
 })

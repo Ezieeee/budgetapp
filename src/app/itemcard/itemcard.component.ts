@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../interface/item.interface';
+import { Item, Card } from '../interface/item.interface';
+import { CardValueService } from '../services/cardvalue.service';
 
 @Component({
   selector: 'app-item-card',
@@ -9,40 +10,8 @@ import { Item } from '../interface/item.interface';
 export class ItemCardComponent implements OnInit {
   public invoice: Item;
 
-  constructor() {
-    this.invoice = {
-      card: [
-        {
-          cardName: 'Számlák',
-          isIncame: false,
-          records: [
-            {
-              recordName: 'villany',
-              recordValue: 50,
-            },
-            {
-              recordName: 'Gáz',
-              recordValue: 100,
-            },
-          ],
-        },
-
-        {
-          cardName: 'Számlák',
-          isIncame: false,
-          records: [
-            {
-              recordName: 'villany',
-              recordValue: 50,
-            },
-            {
-              recordName: 'Gáz',
-              recordValue: 100,
-            },
-          ],
-        },
-      ],
-    };
+  constructor(cardValueService: CardValueService) {
+    this.invoice = cardValueService.getCards();
   }
 
   ngOnInit() {}

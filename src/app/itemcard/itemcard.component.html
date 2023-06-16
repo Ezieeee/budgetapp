@@ -2,10 +2,10 @@
   <h5>{{ cards.cardName }}</h5>
   <div class="record" *ngFor="let record of cards.records">
     <div class="record__name">
-      <h6>{{ record.recordName }}</h6>
+      <h6 [(ngModel)]="record.recordName">{{ record.recordName }}</h6>
     </div>
     <div class="record__value">
-      <h6>{{ record.recordValue }}</h6>
+      <h6 [(ngModel)]="record.recordValue">{{ record.recordValue }}</h6>
     </div>
   </div>
 </ion-card>
