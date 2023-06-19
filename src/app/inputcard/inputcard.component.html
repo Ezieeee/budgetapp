@@ -16,6 +16,7 @@
       [(ngModel)]="record.recordName"
       placeholder="{{ record.recordName }}"
       value="{{ record.recordName }}"
+      ngDefaultControl
     ></ion-input>
     <ion-input
       id="recordInputName"
@@ -25,6 +26,7 @@
       [(ngModel)]="record.recordValue"
       placeholder="{{ record.recordValue }}"
       value="{{ record.recordValue }}"
+      ngDefaultControl
     ></ion-input>
     <button (click)="addRecord(cards.id)">add</button>
     <button (click)="deleteRecord(cards.id, record.id)">Delete</button>
