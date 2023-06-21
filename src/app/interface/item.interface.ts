@@ -20,3 +20,8 @@ export interface Summary {
   costs: number;
   remain: number;
 }
+
+export interface radio {
+  true: boolean;
+  false: boolean;
+}

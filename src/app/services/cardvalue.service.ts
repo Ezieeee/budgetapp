@@ -35,11 +35,25 @@ export class CardValueService {
   public get totalValueNew() {
     let value: number = 0;
     for (let i = 0; i < this.item.card.length; i++) {
-      for (let j = 0; j < this.item.card[i].records.length; j++) {
-        value += this.item.card[i].records[j].recordValue;
+      if (this.item.card[i].isIncame === true) {
+        for (let j = 0; j < this.item.card[i].records.length; j++) {
+          value += this.item.card[i].records[j].recordValue;
+        }
       }
     }
 
+    return value;
+  }
+
+  public get expenditure() {
+    let value: number = 0;
+    for (let i = 0; i < this.item.card.length; i++) {
+      if (this.item.card[i].isIncame === false) {
+        for (let j = 0; j < this.item.card[i].records.length; j++) {
+          value += this.item.card[i].records[j].recordValue;
+        }
+      }
+    }
     return value;
   }
 

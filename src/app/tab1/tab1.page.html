@@ -7,11 +7,13 @@
       </div>
       <div class="summary-box__text-expenditure">
         <h5>Kiadás</h5>
-        <h6>20</h6>
+        <h6>{{ cardValueService.expenditure }}</h6>
       </div>
       <div class="summary-box__text-remnant">
         <h5>Marad</h5>
-        <h6>30</h6>
+        <h6>
+          {{ cardValueService.totalValueNew - cardValueService.expenditure }}
+        </h6>
       </div>
     </div>
     <div class="summary-box__img-holder">

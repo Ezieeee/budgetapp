@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Item, Card } from '../interface/item.interface';
+import { Item, Card, radio } from '../interface/item.interface';
 import { CardValueService } from '../services/cardvalue.service';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-inputcard',
@@ -9,6 +11,12 @@ import { CardValueService } from '../services/cardvalue.service';
 })
 export class InputcardComponent implements OnInit {
   public invoice: Item;
+
+  isModalOpen = false;
+
+  public selectedCard!: Card;
+
+  public radio!: radio;
 
   constructor(public cardValueService: CardValueService) {
     this.invoice = cardValueService.getCards();
@@ -20,7 +28,7 @@ export class InputcardComponent implements OnInit {
     let card: Card = {
       id: this.cardValueService.generateUUID(),
       cardName: 'Kártya név',
-      isIncame: false,
+      isIncame: true,
       records: [
         {
           id: this.cardValueService.generateUUID(),
@@ -66,5 +74,32 @@ export class InputcardComponent implements OnInit {
     }
 
     console.log(cardId, recordID, recordIndex);
+  }
+
+  setOpen(isOpen: boolean, cards?: Card) {
+    if (cards) {
+      this.selectedCard = cards;
+    }
+
+    this.isModalOpen = isOpen;
+  }
+
+  confirm(isOpen: boolean) {
+    for (let i = 0; i < this.invoice.card.length; i++) {
+      if (this.invoice.card[i].id === this.selectedCard.id) {
+        this.invoice.card[i].cardName = this.selectedCard.cardName;
+        this.invoice.card[i].isIncame = this.selectedCard.isIncame;
+        this.isModalOpen = isOpen;
+
+        console.log(
+          this.invoice.card[i].id,
+          this.selectedCard.id,
+          this.selectedCard.cardName,
+          this.invoice.card[i].cardName,
+          this.selectedCard.isIncame,
+          this.invoice.card[i].isIncame
+        );
+      }
+    }
   }
 }
