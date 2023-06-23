@@ -31,12 +31,14 @@
       type="number"
       labelPlacement="floating"
       [(ngModel)]="record.recordValue"
+      (input)="cardValueService.summaryCosts()"
       placeholder="{{ record.recordValue }}"
       value="{{ record.recordValue }}"
     ></ion-input>
     <button (click)="addRecord(cards.id)">add</button>
     <button (click)="deleteRecord(cards.id, record.id)">Delete</button>
   </div>
+  <h6>{{ cards.sum }}</h6>
 </ion-card>
 <button class="btn-primary" (click)="newGroup()">+ Új csoport</button>
 <ion-modal [isOpen]="isModalOpen">

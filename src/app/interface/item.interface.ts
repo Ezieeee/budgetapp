@@ -12,6 +12,7 @@ export interface Card {
   id: string;
   cardName: string;
   isIncame: boolean;
+  sum: number;
   records: Record[];
 }
 

@@ -29,6 +29,7 @@ export class InputcardComponent implements OnInit {
       id: this.cardValueService.generateUUID(),
       cardName: 'Kártya név',
       isIncame: true,
+      sum: 0,
       records: [
         {
           id: this.cardValueService.generateUUID(),

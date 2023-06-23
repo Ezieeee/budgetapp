@@ -32,6 +32,18 @@ export class CardValueService {
     return this.totalValue;
   }
 
+  public summaryCosts() {
+    let sumCard = 0;
+
+    for (let i = 0; i < this.item.card.length; i++) {
+      sumCard = 0;
+      for (let j = 0; j < this.item.card[i].records.length; j++) {
+        sumCard += this.item.card[i].records[j].recordValue;
+      }
+      this.item.card[i].sum = sumCard;
+    }
+  }
+
   public get totalValueNew() {
     let value: number = 0;
     for (let i = 0; i < this.item.card.length; i++) {
