@@ -1,45 +1,57 @@
-<ion-card *ngFor="let cards of invoice.card">
-  <div class="records-edit">
-    <div class="records-edit__left">
-      <h5>{{ cards.cardName }}</h5>
-      <h6 class="isincame">
-        {{ cards.isIncame === true ? "Bevétel" : "Kiadás" }}
-      </h6>
-      <ion-icon
-        expand="block"
-        (click)="setOpen(true, cards)"
-        name="construct-outline"
-      ></ion-icon>
+<ion-reorder-group
+  [disabled]="false"
+  (ionItemReorder)="cardValueService.handleReorder($any($event))"
+>
+  <ion-card *ngFor="let cards of invoice.card">
+    <div class="records-edit">
+      <div class="records-edit__left">
+        <ion-reorder>
+          <h5>{{ cards.cardName }}</h5>
+        </ion-reorder>
+        <h6 class="isincame">
+          {{ cards.isIncame === true ? "Bevétel" : "Kiadás" }}
+        </h6>
+        <ion-icon
+          expand="block"
+          (click)="setOpen(true, cards)"
+          name="construct-outline"
+        ></ion-icon>
+      </div>
+      <div class="records-edit__right">
+        <h6 (click)="deleteCard(cards.id)">kártya törlés</h6>
+      </div>
     </div>
-    <div class="records-edit__right">
-      <h6 (click)="deleteCard(cards.id)">kártya törlés</h6>
-    </div>
-  </div>
 
-  <div id="re-input" class="records-input" *ngFor="let record of cards.records">
-    <ion-input
-      id="recordInputName"
-      label="Szöveg"
-      labelPlacement="floating"
-      [(ngModel)]="record.recordName"
-      placeholder="{{ record.recordName }}"
-      value="{{ record.recordName }}"
-    ></ion-input>
-    <ion-input
-      id="recordInputName"
-      label="Érték"
-      type="number"
-      labelPlacement="floating"
-      [(ngModel)]="record.recordValue"
-      (input)="cardValueService.summaryCosts()"
-      placeholder="{{ record.recordValue }}"
-      value="{{ record.recordValue }}"
-    ></ion-input>
-    <button (click)="addRecord(cards.id)">add</button>
-    <button (click)="deleteRecord(cards.id, record.id)">Delete</button>
-  </div>
-  <h6>{{ cards.sum }}</h6>
-</ion-card>
+    <div
+      id="re-input"
+      class="records-input"
+      *ngFor="let record of cards.records"
+    >
+      <ion-input
+        id="recordInputName"
+        label="Szöveg"
+        labelPlacement="floating"
+        [(ngModel)]="record.recordName"
+        placeholder="{{ record.recordName }}"
+        value="{{ record.recordName }}"
+      ></ion-input>
+      <ion-input
+        id="recordInputName"
+        label="Érték"
+        type="number"
+        labelPlacement="floating"
+        [(ngModel)]="record.recordValue"
+        (input)="cardValueService.summaryCosts()"
+        placeholder="{{ record.recordValue }}"
+        value="{{ record.recordValue }}"
+      ></ion-input>
+      <button (click)="addRecord(cards.id)">add</button>
+      <button (click)="deleteRecord(cards.id, record.id)">Delete</button>
+    </div>
+    <h6>{{ cards.sum }}</h6>
+  </ion-card></ion-reorder-group
+>
+
 <button class="btn-primary" (click)="newGroup()">+ Új csoport</button>
 <ion-modal [isOpen]="isModalOpen">
   <ng-template>

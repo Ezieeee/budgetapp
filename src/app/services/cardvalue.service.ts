@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Card, Item, Summary } from '../interface/item.interface';
+import { ItemReorderEventDetail } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,17 @@ export class CardValueService {
 
     console.log(typeof this.totalValue);
     return this.totalValue;
+  }
+
+  public handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
+    // The `from` and `to` properties contain the index of the item
+    // when the drag started and ended, respectively
+    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
+
+    // Finish the reorder and position the item in the DOM based on
+    // where the gesture ended. This method can also be called directly
+    // by the reorder group
+    ev.detail.complete();
   }
 
   public summaryCosts() {

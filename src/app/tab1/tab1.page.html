@@ -19,12 +19,12 @@
     <div class="summary-box__img-holder">
       <img
         *ngIf="(cardValueService.expenditure / cardValueService.totalValueNew) * 100 >= 50"
-        src="../../assets/imgs/good-job.png"
+        src="../../assets/imgs/sad.png"
         alt=""
       />
       <img
         *ngIf="(cardValueService.expenditure / cardValueService.totalValueNew ) * 100 < 49"
-        src="../../assets/imgs/sad.png"
+        src="../../assets/imgs/good-job.png"
         alt=""
       />
     </div>
