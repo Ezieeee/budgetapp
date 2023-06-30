@@ -1,9 +1,11 @@
-<ion-card *ngFor="let cards of invoice.card">
-  <h5>{{ cards.cardName }}</h5>
+<ion-card
+  *ngFor="let card of cardValueService.months[cardValueService.monthId]"
+>
+  <h5>{{ card.cardName }}</h5>
   <h6 class="isincame">
-    {{ cards.isIncame === true ? "Bevétel" : "Kiadás" }}
+    {{ card.isIncame === true ? "Bevétel" : "Kiadás" }}
   </h6>
-  <div class="record" *ngFor="let record of cards.records">
+  <div class="record" *ngFor="let record of card.records">
     <div class="record__name">
       <h6>{{ record.recordName }}</h6>
     </div>

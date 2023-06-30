@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Item, Card } from '../interface/item.interface';
 import { CardValueService } from '../services/cardvalue.service';
+import { Months } from '../interface/item.interface';
 
 @Component({
   selector: 'app-item-card',
@@ -8,9 +8,9 @@ import { CardValueService } from '../services/cardvalue.service';
   styleUrls: ['./itemcard.component.scss'],
 })
 export class ItemCardComponent implements OnInit {
-  public invoice: Item;
+  public invoice: Months;
 
-  constructor(cardValueService: CardValueService) {
+  constructor(public cardValueService: CardValueService) {
     this.invoice = cardValueService.getCards();
   }
 

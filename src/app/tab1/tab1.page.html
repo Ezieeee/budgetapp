@@ -23,11 +23,12 @@
         alt=""
       />
       <img
-        *ngIf="(cardValueService.expenditure / cardValueService.totalValueNew ) * 100 < 49"
+        *ngIf="(cardValueService.expenditure / cardValueService.totalValueNew) * 100 <= 49"
         src="../../assets/imgs/good-job.png"
         alt=""
       />
     </div>
   </div>
+
   <app-item-card></app-item-card>
 </ion-content>

@@ -1,5 +1,5 @@
-export interface Item {
-  card: Card[];
+export interface Months {
+  [monthId: string]: Card[];
 }
 
 export interface Record {

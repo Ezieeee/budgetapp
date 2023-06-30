@@ -1,31 +1,42 @@
-<ion-reorder-group
-  [disabled]="false"
-  (ionItemReorder)="cardValueService.handleReorder($any($event))"
->
-  <ion-card *ngFor="let cards of invoice.card">
+<ion-content>
+  <div class="calendar">
+    <ion-icon
+      name="arrow-back-outline"
+      (click)="cardValueService.prevMonth()"
+    ></ion-icon>
+    {{ cardValueService.getCurrentMonthName() }}
+    {{ cardValueService.currentYear }}
+    <ion-icon
+      name="arrow-forward-outline"
+      (click)="cardValueService.nextMonth()"
+    ></ion-icon>
+  </div>
+  <ion-card
+    *ngFor="let card of cardValueService.months[cardValueService.monthId]"
+  >
     <div class="records-edit">
       <div class="records-edit__left">
-        <ion-reorder>
-          <h5>{{ cards.cardName }}</h5>
-        </ion-reorder>
+        <h5>{{ card.cardName }}</h5>
         <h6 class="isincame">
-          {{ cards.isIncame === true ? "Bevétel" : "Kiadás" }}
+          {{ card.isIncame === true ? "Bevétel" : "Kiadás" }}
         </h6>
         <ion-icon
           expand="block"
-          (click)="setOpen(true, cards)"
           name="construct-outline"
+          (click)="setOpen(true, card)"
         ></ion-icon>
       </div>
       <div class="records-edit__right">
-        <h6 (click)="deleteCard(cards.id)">kártya törlés</h6>
+        <h6 (click)="deleteCard(card.id, cardValueService.monthId)">
+          kártya törlés
+        </h6>
       </div>
     </div>
 
     <div
       id="re-input"
       class="records-input"
-      *ngFor="let record of cards.records"
+      *ngFor="let record of card.records"
     >
       <ion-input
         id="recordInputName"
@@ -41,45 +52,55 @@
         type="number"
         labelPlacement="floating"
         [(ngModel)]="record.recordValue"
-        (input)="cardValueService.summaryCosts()"
         placeholder="{{ record.recordValue }}"
         value="{{ record.recordValue }}"
       ></ion-input>
-      <button (click)="addRecord(cards.id)">add</button>
-      <button (click)="deleteRecord(cards.id, record.id)">Delete</button>
+      <button (click)="newRecord(card.id, cardValueService.monthId, record.id)">
+        add
+      </button>
+      <button
+        (click)="deleteRecord(card.id, cardValueService.monthId, record.id)"
+      >
+        Delete
+      </button>
     </div>
-    <h6>{{ cards.sum }}</h6>
-  </ion-card></ion-reorder-group
->
+  </ion-card>
 
-<button class="btn-primary" (click)="newGroup()">+ Új csoport</button>
-<ion-modal [isOpen]="isModalOpen">
-  <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Kártya szerkeztése</ion-title>
-        <ion-buttons slot="start">
-          <ion-button (click)="setOpen(false)">Cancel</ion-button>
-        </ion-buttons>
-        <ion-buttons slot="end">
-          <ion-button [strong]="true" (click)="confirm(false)"
-            >Confirm</ion-button
-          >
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <ion-radio-group [(ngModel)]="selectedCard.isIncame">
-        <ion-radio [value]="false">Kiadás</ion-radio><br />
-        <ion-radio [value]="true">Bevétel</ion-radio><br />
-      </ion-radio-group>
-      <ion-input
-        id="newCardName"
-        label="Új kártya neve"
-        labelPlacement="floating"
-        value="{{ selectedCard.cardName }}"
-        [(ngModel)]="selectedCard.cardName"
-      ></ion-input>
-    </ion-content>
-  </ng-template>
-</ion-modal>
+  <button class="btn-primary" (click)="newCard(cardValueService.monthId)">
+    + Új csoport
+  </button>
+  <button class="btn-primary" (click)="saveData()">Mentés localba</button>
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Kártya szerkeztése</ion-title>
+          <ion-buttons slot="start">
+            <ion-button (click)="setOpen(false)">Cancel</ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button
+              [strong]="true"
+              (click)="confirm(false, cardValueService.monthId)"
+              >Confirm</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-radio-group [(ngModel)]="selectedCard.isIncame">
+          <ion-radio [value]="false">Kiadás</ion-radio><br />
+          <ion-radio [value]="true">Bevétel</ion-radio><br />
+        </ion-radio-group>
+        <ion-input
+          id="newCardName"
+          label="Új kártya neve"
+          labelPlacement="floating"
+          value="{{ selectedCard.cardName }}"
+          [(ngModel)]="selectedCard.cardName"
+        ></ion-input>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

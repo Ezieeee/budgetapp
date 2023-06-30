@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Item, Card, radio } from '../interface/item.interface';
+import { Card, radio, Months } from '../interface/item.interface';
 import { CardValueService } from '../services/cardvalue.service';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
+
+import { DatawriterService } from '../services/datawriter.service';
 
 @Component({
   selector: 'app-inputcard',
@@ -10,7 +10,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
   styleUrls: ['./inputcard.component.scss'],
 })
 export class InputcardComponent implements OnInit {
-  public invoice: Item;
+  public invoice: Months;
 
   isModalOpen = false;
 
@@ -18,13 +18,16 @@ export class InputcardComponent implements OnInit {
 
   public radio!: radio;
 
-  constructor(public cardValueService: CardValueService) {
+  constructor(
+    public datawriterservice: DatawriterService,
+    public cardValueService: CardValueService
+  ) {
     this.invoice = cardValueService.getCards();
   }
 
   ngOnInit() {}
 
-  public newGroup() {
+  public newCard(monthId: string) {
     let card: Card = {
       id: this.cardValueService.generateUUID(),
       cardName: 'Kártya név',
@@ -38,68 +41,94 @@ export class InputcardComponent implements OnInit {
         },
       ],
     };
-    this.cardValueService.addCard(card);
-    console.log(this.cardValueService.generateUUID());
-  }
 
-  public valami() {
-    this.cardValueService.summaryValues();
-    console.log(this.cardValueService.totalValue);
-  }
-
-  public deleteCard(id: string) {
-    let objID = this.invoice.card.findIndex((objID) => objID.id === id);
-    console.log(objID);
-    this.invoice.card.splice(objID, 1);
-  }
-
-  public addRecord(id: string) {
-    let objID = this.invoice.card.findIndex((objID) => objID.id === id);
-
-    this.invoice.card[objID].records.push({
-      id: this.cardValueService.generateUUID(),
-      recordName: 'Tétel neve',
-      recordValue: 0,
-    });
-  }
-
-  public deleteRecord(cardId: string, recordID: string) {
-    let objID = this.invoice.card.findIndex((objID) => objID.id === cardId);
-    let recordIndex = this.invoice.card[objID].records.findIndex(
-      (record) => record.id === recordID
-    );
-    if (recordIndex === 0) {
-      this.invoice.card.splice(objID, 1);
+    if (this.cardValueService.months.hasOwnProperty(monthId)) {
+      this.cardValueService.months[monthId].push(card);
     } else {
-      this.invoice.card[objID].records.splice(recordIndex, 1);
+      this.cardValueService.months[monthId] = [card];
     }
-
-    console.log(cardId, recordID, recordIndex);
   }
 
-  setOpen(isOpen: boolean, cards?: Card) {
-    if (cards) {
-      this.selectedCard = cards;
-    }
+  public newRecord(cardId: string, monthId: string, recordId: string) {
+    const month = this.cardValueService.months[monthId];
 
+    if (month) {
+      const cardIndex = month.findIndex((card) => card.id === cardId);
+
+      if (cardIndex !== -1) {
+        const card = month[cardIndex];
+        const recordIndex = card.records.findIndex(
+          (recordIndex) => recordIndex.id === recordId
+        );
+
+        if (recordIndex !== -1) {
+          this.cardValueService.months[monthId][cardIndex].records.push({
+            id: this.cardValueService.generateUUID(),
+            recordName: 'Tétel neve',
+            recordValue: 0,
+          });
+        }
+      }
+    }
+  }
+
+  public deleteRecord(cardId: string, monthId: string, recordId: string) {
+    const month = this.cardValueService.months[monthId];
+
+    if (month) {
+      const cardIndex = month.findIndex((card) => card.id === cardId);
+
+      if (cardIndex !== -1) {
+        const card = month[cardIndex];
+        const recordIndex = card.records.findIndex(
+          (recordIndex) => recordIndex.id === recordId
+        );
+
+        if (recordIndex !== -1) {
+          this.cardValueService.months[monthId][cardIndex].records.splice(
+            recordIndex,
+            1
+          );
+
+          if (
+            this.cardValueService.months[monthId][cardIndex].records.length ===
+            0
+          ) {
+            this.cardValueService.months[monthId].splice(cardIndex, 1);
+          }
+        }
+      }
+    }
+  }
+
+  public deleteCard(cardId: string, monthId: string) {
+    const month = this.cardValueService.months[monthId];
+    if (month) {
+      const cardIndex = month.findIndex((card) => card.id === cardId);
+
+      if (cardIndex !== -1) {
+        this.cardValueService.months[monthId].splice(cardIndex, 1);
+      }
+    }
+  }
+
+  public saveData() {
+    this.datawriterservice.saveLocalData(this.cardValueService.months);
+    console.log('Sikeres mentés');
+  }
+
+  setOpen(isOpen: boolean, card?: Card) {
+    if (card) {
+      this.selectedCard = card;
+    }
     this.isModalOpen = isOpen;
   }
 
-  confirm(isOpen: boolean) {
-    for (let i = 0; i < this.invoice.card.length; i++) {
-      if (this.invoice.card[i].id === this.selectedCard.id) {
-        this.invoice.card[i].cardName = this.selectedCard.cardName;
-        this.invoice.card[i].isIncame = this.selectedCard.isIncame;
+  confirm(isOpen: boolean, monthId: string) {
+    for (const card of this.cardValueService.months[monthId]) {
+      if (card.id === this.selectedCard.id) {
+        card.cardName = this.selectedCard.cardName;
         this.isModalOpen = isOpen;
-
-        console.log(
-          this.invoice.card[i].id,
-          this.selectedCard.id,
-          this.selectedCard.cardName,
-          this.invoice.card[i].cardName,
-          this.selectedCard.isIncame,
-          this.invoice.card[i].isIncame
-        );
       }
     }
   }
