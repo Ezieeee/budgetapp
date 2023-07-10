@@ -38,6 +38,7 @@ export class InputcardComponent implements OnInit {
           id: this.cardValueService.generateUUID(),
           recordName: 'Tétel neve',
           recordValue: 0,
+          RecordStatus: false,
         },
       ],
     };
@@ -62,10 +63,14 @@ export class InputcardComponent implements OnInit {
         );
 
         if (recordIndex !== -1) {
+          this.cardValueService.months[monthId][cardIndex].records[
+            recordIndex
+          ].RecordStatus = true;
           this.cardValueService.months[monthId][cardIndex].records.push({
             id: this.cardValueService.generateUUID(),
             recordName: 'Tétel neve',
             recordValue: 0,
+            RecordStatus: false,
           });
         }
       }
@@ -85,6 +90,9 @@ export class InputcardComponent implements OnInit {
         );
 
         if (recordIndex !== -1) {
+          this.cardValueService.months[monthId][cardIndex].records[
+            recordIndex
+          ].RecordStatus = false;
           this.cardValueService.months[monthId][cardIndex].records.splice(
             recordIndex,
             1
@@ -95,6 +103,7 @@ export class InputcardComponent implements OnInit {
             0
           ) {
             this.cardValueService.months[monthId].splice(cardIndex, 1);
+            console.log(cardIndex, recordIndex);
           }
         }
       }

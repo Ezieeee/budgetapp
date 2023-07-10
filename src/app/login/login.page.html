@@ -1,0 +1,58 @@
+<ion-header collapse="condense" class="mt-50">
+  <ion-toolbar>
+    <ion-icon [routerLink]="['/']" name="arrow-back-outline"></ion-icon>
+  </ion-toolbar> </ion-header
+><ion-content [fullscreen]="true">
+  <div *ngIf="showLogin">
+    <h2>Bejelentkezés</h2>
+    <!-- Bejelentkezési űrlap -->
+    <!-- NgModel és NgForm használata az űrlap adatok kezelésére -->
+    <form (ngSubmit)="login()">
+      <!-- Űrlapmezők -->
+      <ion-input
+        type="text"
+        name="username"
+        placeholder="Felhasználónév"
+        required
+      />
+      <ion-input
+        type="password"
+        name="password"
+        placeholder="Jelszó"
+        required
+      />
+      <!-- Bejelentkezés gomb -->
+      <button class="btn-primary" type="submit">Bejelentkezés</button>
+    </form>
+    <p *ngIf="loginError" style="color: red">
+      Hibás felhasználónév vagy jelszó.
+    </p>
+    <p>Nincs még fiókod? <a (click)="toggleView()">Regisztráció</a></p>
+  </div>
+
+  <div *ngIf="!showLogin">
+    <h2>Regisztráció</h2>
+    <!-- Regisztrációs űrlap -->
+    <!-- NgModel és NgForm használata az űrlap adatok kezelésére -->
+    <form (ngSubmit)="register()">
+      <!-- Űrlapmezők -->
+      <ion-input
+        type="text"
+        name="username"
+        placeholder="Felhasználónév"
+        required
+      />
+      <ion-input type="email" name="email" placeholder="E-mail cím" required />
+      <ion-input
+        type="password"
+        name="password"
+        placeholder="Jelszó"
+        required
+      />
+      <!-- Regisztráció gomb -->
+      <button class="btn-primary" type="submit">Regisztráció</button>
+    </form>
+    <p *ngIf="registerError" style="color: red">A regisztráció nem sikerült.</p>
+    <p>Már van fiókod? <a (click)="toggleView()">Bejelentkezés</a></p>
+  </div>
+</ion-content>

@@ -160,7 +160,7 @@ h6 {
   padding: 15px 15px;
   border-radius: 10px;
   display: block;
-  margin: 0 auto;
+  margin: 15px auto 0 auto;
 }
 
 .records-edit {
@@ -208,4 +208,13 @@ ion-icon {
   margin: 20px 0;
   display: flex;
   justify-content: space-around;
+}
+
+.mt-50 {
+  margin-top: 80px;
+}
+
+ion-input {
+  background-color: white;
+  color: black !important;
 }

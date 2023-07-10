@@ -5,6 +5,7 @@ import { Tab1Page } from './tab1.page';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { ItemCardModule } from '../itemcard/itemcard.module';
+import { ForintModule } from '../pipes/forint.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { ItemCardModule } from '../itemcard/itemcard.module';
     FormsModule,
     Tab1PageRoutingModule,
     ItemCardModule,
+    ForintModule,
   ],
   declarations: [Tab1Page],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

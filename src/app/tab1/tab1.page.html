@@ -1,18 +1,19 @@
 <ion-content [fullscreen]="true">
-  <div class="summary-box">
+  <div class="summary-box mt-50">
     <div class="summary-box__text">
       <div class="summary-box__text-income">
         <h5>Teljes bevétel</h5>
-        <h6>{{ cardValueService.totalValueNew }}</h6>
+        <h6>{{ cardValueService.totalValueNew | forint }}</h6>
       </div>
       <div class="summary-box__text-expenditure">
         <h5>Kiadás</h5>
-        <h6>{{ cardValueService.expenditure }}</h6>
+        <h6>{{ cardValueService.expenditure | forint }}</h6>
       </div>
       <div class="summary-box__text-remnant">
         <h5>Marad</h5>
         <h6>
-          {{ cardValueService.totalValueNew - cardValueService.expenditure }}
+          {{ cardValueService.totalValueNew - cardValueService.expenditure |
+          forint }}
         </h6>
       </div>
     </div>
